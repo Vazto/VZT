@@ -1,0 +1,49 @@
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #texto {
+            min-height: 150px;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        .miembros {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .miembro {
+            text-align: center;
+            margin: 10px;
+            flex: 1 1 300px;
+        }
+        .miembro img {
+            width: 100%;
+            max-width: 200px;
+            height: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .cambiar {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+        }
+        @media (max-width: 600px) {
+            .miembros {
+                flex-direction: column;
+                align-items: center;
+            }
+            .miembro {
+                margin: 20px 0;
+            }
+        }

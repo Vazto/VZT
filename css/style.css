@@ -1,0 +1,464 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+:root {
+    --azul: #001F47;
+    --blanco: #F9F9F9;
+    --negro: #1C1C1C;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.contenedor {
+    position: relative;
+    width: 100%;
+}
+
+.navegar {
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    background: var(--azul);
+    border-left: 10px solid var(--azul);
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+.navegar.activo {
+    width: 80px;
+}
+
+.navegar ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 50px;
+}
+
+.navegar ul li {
+    position: relative;
+    width: 100%;
+    list-style: none;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.navegar ul li:hover {
+    background: var(--blanco);
+}
+
+.navegar ul li a {
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: var(--blanco);
+}
+
+.navegar ul li:hover a,
+.navegar ul li.hovered a {
+    color: var(--azul);
+}
+
+.navegar ul li a .icono {
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 70px;
+    text-align: center;
+}
+
+.navegar ul li a .titulo {
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;
+    white-space: nowrap;
+}
+
+.navegar ul li:nth-child(1):hover .icono img,
+.navegar ul li:nth-child(1).hovered .icono img {
+    content: url('/Ojevazt/Imágenes/Iconos/Menu hover.svg');
+}
+
+.navegar ul li:nth-child(2):hover .icono img,
+.navegar ul li:nth-child(2).hovered .icono img {
+    content: url('/Ojevazt/Imágenes/Iconos/Cobros hover.svg');
+}
+
+.navegar ul li:nth-child(3):hover .icono img,
+.navegar ul li:nth-child(3).hovered .icono img {
+    content: url('/Ojevazt/Imágenes/Iconos/Pagos hover.svg');
+}
+
+.navegar ul li:nth-child(4):hover .icono img,
+.navegar ul li:nth-child(4).hovered .icono img {
+    content: url('/Ojevazt/Imágenes/Iconos/Proveedores hover.svg');
+}
+
+.navegar ul li:nth-child(5):hover .icono img,
+.navegar ul li:nth-child(5).hovered .icono img {
+    content: url('/Ojevazt/Imágenes/Iconos/Productos hover.svg');
+}
+
+.navegar ul li:nth-child(6):hover .icono img,
+.navegar ul li:nth-child(6).hovered .icono img {
+    content: url('/Ojevazt/Imágenes/Iconos/Clientes hover.svg');
+}
+
+.navegar ul li:nth-child(7):hover .icono img,
+.navegar ul li:nth-child(7).hovered .icono img {
+    content: url('/Ojevazt/Imágenes/Iconos/Resumen hover.svg');
+}
+
+.navegar ul li:nth-child(8):hover .icono img,
+.navegar ul li:nth-child(8).hovered .icono img {
+    content: url('/Ojevazt/Imágenes/Iconos/Sorteos hover.svg');
+}
+
+.navegar ul li:hover a::before,
+.navegar ul li.hovered a::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -50px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 35px 35px 0 10px var(--blanco);
+    pointer-events: none;
+}
+
+.navegar ul li:hover a::after,
+.navegar ul li.hovered a::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -50px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 35px -35px 0 10px var(--blanco);
+    pointer-events: none;
+}
+
+.principal {
+    position: absolute;
+    width: calc(100% - 300px);
+    left: 300px;
+    min-height: 100vh;
+    background: var(--blanco);
+    transition: 0.5s;
+}
+
+.principal.activo {
+    width: calc(100% - 80px);
+    left: 80px;
+}
+
+.barra {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.alternar {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.buscar {
+    position: relative;
+    width: 400px;
+    margin: 0 auto;
+}
+
+.buscar label {
+    position: relative;
+    width: 100%;
+}
+
+.buscar label input {
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    padding: 5px 20px;
+    padding-left: 45px;
+    outline: none;
+    border: 1px solid var(--negro);
+}
+
+.buscar label img {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+}
+
+.usuario {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.usuario img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.caja {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+}
+
+.caja .tarjeta {
+    position: relative;
+    background: white;
+    padding: 30px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+.caja .tarjeta .numeros {
+    position: relative;
+    font-weight: 500;
+    font-size: 2.5em;
+    color: var(--azul);
+}
+
+.caja .tarjeta .nombres {
+    color: var(--negro);
+    font-size: 1.1em;
+    margin-top: 5px;
+}
+
+.caja .tarjeta .icono-tarjeta {
+    color: var(--negro);
+}
+
+.caja .tarjeta:hover {
+    background: var(--azul);
+}
+
+.caja .tarjeta:hover .numeros,
+.caja .tarjeta:hover .nombres,
+.caja .tarjeta:hover .icono-tarjeta {
+    color: var(--blanco);
+}
+
+.caja .tarjeta-1:hover .icono-tarjeta img {
+    content: url('Iconos/Ventas hover.svg');
+}
+
+.caja .tarjeta-2:hover .icono-tarjeta img {
+    content: url('Iconos/ProductoA hover.svg');
+}
+
+.caja .tarjeta-3:hover .icono-tarjeta img {
+    content: url('Iconos/ProductoB hover.svg');
+}
+
+.caja .tarjeta-4:hover .icono-tarjeta img {
+    content: url('Iconos/ProductoC hover.svg');
+}
+
+.con {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 30px;
+    box-sizing: border-box;
+    min-height: 200px;
+}
+
+.con .sub {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+.sub h2 {
+    font-weight: 600;
+    color: var(--azul);
+}
+
+.fechas {
+    position: relative;
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fechas input {
+    width: calc(50% - 10px);
+    border-radius: 20px;
+    height: 40px;
+    padding: 0 20px;
+    outline: none;
+    border: 1px solid var(--negro);
+    box-sizing: border-box;
+}
+
+.detalles {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 30px;
+}
+
+.detalles .recientes {
+    position: relative;
+    display: grid;
+    height: 500px;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    overflow-y: auto;
+}
+
+.encabezado {
+   display: flex;
+   justify-content: space-between;
+   align-items: flex-start;
+}
+
+.encabezado h2 {
+    font-weight: 600;
+    color: var(--azul);
+}
+
+.ver {
+    position: relative;
+    padding: 5px 10px;
+    background-color: var(--azul);
+    text-decoration: none;
+    color: white;
+    border-radius: 6px;
+}
+
+.detalles table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.detalles table thead td {
+    font-weight: 600;
+}
+
+.detalles .recientes table tr {
+    color: var(--negro);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    height: 40px;
+}
+
+.detalles .recientes table tr:last-child {
+    border-bottom: none;
+    height: 40px;
+}
+
+.detalles .recientes table tbody tr:hover {
+    background-color: var(--azul);
+    color: white;
+}
+
+.detalles .recientes table tr td {
+    padding: 10px;
+}
+
+.detalles .recientes table tr td:last-child {
+    text-align: end;
+}
+
+.detalles .recientes table tr td:nth-child(2) {
+    text-align: end;
+}
+
+.detalles .recientes table tr td:nth-child(3) {
+    text-align: center;
+}
+
+.editar, .eliminar {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.editar {
+    background-color: var(--azul);
+    color: white;
+}
+
+.eliminar {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.agregar {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background-color: #007BFF;
+    color: white;
+    font-size: 24px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+}
+
+.agregar:hover {
+    background-color: #0056b3;
+}
