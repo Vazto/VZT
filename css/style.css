@@ -7,7 +7,7 @@
 
 :root {
     --azul: #001F47;
-    --blanco: #ffa703;
+    --blanco: #F9F9F9;
     --negro: #1C1C1C;
 }
 
@@ -64,8 +64,7 @@ body {
     color: var(--blanco);
 }
 
-.navegar ul li:hover a,
-.navegar ul li.hovered a {
+.navegar ul li:hover a {
     color: var(--azul);
 }
 
@@ -88,48 +87,39 @@ body {
     white-space: nowrap;
 }
 
-.navegar ul li:nth-child(1):hover .icono img,
-.navegar ul li:nth-child(1).hovered .icono img {
-    content: url('/Ojevazt/Imágenes/Iconos/Menu hover.svg');
+.navegar ul li:nth-child(1):hover .icono img {
+    content: url('../Imágenes/Iconos/Menu hover.svg');
 }
 
-.navegar ul li:nth-child(2):hover .icono img,
-.navegar ul li:nth-child(2).hovered .icono img {
-    content: url('/Ojevazt/Imágenes/Iconos/Cobros hover.svg');
+.navegar ul li:nth-child(2):hover .icono img {
+    content: url('../Imágenes/Iconos/Cobros hover.svg');
 }
 
-.navegar ul li:nth-child(3):hover .icono img,
-.navegar ul li:nth-child(3).hovered .icono img {
-    content: url('/Ojevazt/Imágenes/Iconos/Pagos hover.svg');
+.navegar ul li:nth-child(3):hover .icono img {
+    content: url('../Imágenes/Iconos/Pagos hover.svg');
 }
 
-.navegar ul li:nth-child(4):hover .icono img,
-.navegar ul li:nth-child(4).hovered .icono img {
-    content: url('/Ojevazt/Imágenes/Iconos/Proveedores hover.svg');
+.navegar ul li:nth-child(4):hover .icono img {
+    content: url('../Imágenes/Iconos/Proveedores hover.svg');
 }
 
-.navegar ul li:nth-child(5):hover .icono img,
-.navegar ul li:nth-child(5).hovered .icono img {
-    content: url('/Ojevazt/Imágenes/Iconos/Productos hover.svg');
+.navegar ul li:nth-child(5):hover .icono img {
+    content: url('../Imágenes/Iconos/Productos hover.svg');
 }
 
-.navegar ul li:nth-child(6):hover .icono img,
-.navegar ul li:nth-child(6).hovered .icono img {
-    content: url('/Ojevazt/Imágenes/Iconos/Clientes hover.svg');
+.navegar ul li:nth-child(6):hover .icono img {
+    content: url('../Imágenes/Iconos/Clientes hover.svg');
 }
 
-.navegar ul li:nth-child(7):hover .icono img,
-.navegar ul li:nth-child(7).hovered .icono img {
-    content: url('/Ojevazt/Imágenes/Iconos/Resumen hover.svg');
+.navegar ul li:nth-child(7):hover .icono img {
+    content: url('../Imágenes/Iconos/Resumen hover.svg');
 }
 
-.navegar ul li:nth-child(8):hover .icono img,
-.navegar ul li:nth-child(8).hovered .icono img {
-    content: url('/Ojevazt/Imágenes/Iconos/Sorteos hover.svg');
+.navegar ul li:nth-child(8):hover .icono img {
+    content: url('../Imágenes/Iconos/Sorteos hover.svg');
 }
 
-.navegar ul li:hover a::before,
-.navegar ul li.hovered a::before {
+.navegar ul li:hover a::before {
     content: '';
     position: absolute;
     right: 0;
@@ -142,8 +132,7 @@ body {
     pointer-events: none;
 }
 
-.navegar ul li:hover a::after,
-.navegar ul li.hovered a::after {
+.navegar ul li:hover a::after {
     content: '';
     position: absolute;
     right: 0;
@@ -286,19 +275,19 @@ body {
 }
 
 .caja .tarjeta-1:hover .icono-tarjeta img {
-    content: url('Iconos/Ventas hover.svg');
+    content: url('../Imágenes/Iconos/Ventas hover.svg');
 }
 
 .caja .tarjeta-2:hover .icono-tarjeta img {
-    content: url('Iconos/ProductoA hover.svg');
+    content: url('../Imágenes/Iconos/ProductoA hover.svg');
 }
 
 .caja .tarjeta-3:hover .icono-tarjeta img {
-    content: url('Iconos/ProductoB hover.svg');
+    content: url('../Imágenes/Iconos/ProductoB hover.svg');
 }
 
 .caja .tarjeta-4:hover .icono-tarjeta img {
-    content: url('Iconos/ProductoC hover.svg');
+    content: url('../Imágenes/Iconos/ProductoC hover.svg');
 }
 
 .con {
@@ -324,24 +313,29 @@ body {
 .sub h2 {
     font-weight: 600;
     color: var(--azul);
+    margin-bottom: 20px;
 }
 
 .fechas {
     position: relative;
-    width: 50%;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto 0;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .fechas input {
     width: calc(50% - 10px);
-    border-radius: 20px;
     height: 40px;
-    padding: 0 20px;
+    border-radius: 40px;
+    padding: 5px 20px;
     outline: none;
     border: 1px solid var(--negro);
     box-sizing: border-box;
+    font-size: 14px;
+    transition: all 0.3s ease;
 }
 
 .detalles {
@@ -353,61 +347,86 @@ body {
     grid-gap: 30px;
 }
 
-.detalles .recientes {
+.detalles .recientes,
+.detalles .existencias {
     position: relative;
-    display: grid;
-    height: 500px;
+    display: flex;
+    flex-direction: column;
     background: white;
     padding: 20px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
     border-radius: 20px;
-    overflow-y: auto;
+    height: 500px;
 }
 
 .encabezado {
-   display: flex;
-   justify-content: space-between;
-   align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
 }
 
 .encabezado h2 {
     font-weight: 600;
     color: var(--azul);
+    margin: 0;
+    padding-bottom: 10px;
 }
 
-.ver {
-    position: relative;
-    padding: 5px 10px;
-    background-color: var(--azul);
-    text-decoration: none;
-    color: white;
-    border-radius: 6px;
+
+
+
+
+.login{
+
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0.2);
+    border: solid #dbdbdb 0.571429px;
+    background-color: var(--blanco);
+    color: var(--azul);
+    align-items: center;
+
+
+}
+
+
+
+
+
+
+
+.tabla-contenedor {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-top: 10px;
 }
 
 .detalles table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
+    border-spacing: 0 10px;
 }
 
 .detalles table thead td {
     font-weight: 600;
+    padding-bottom: 10px;
 }
 
 .detalles .recientes table tr {
-    color: var(--negro);
+    color: var(--black1);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    height: 40px;
 }
 
 .detalles .recientes table tr:last-child {
     border-bottom: none;
-    height: 40px;
 }
 
 .detalles .recientes table tbody tr:hover {
-    background-color: var(--azul);
-    color: white;
+    background: var(--blue);
+    color: var(--white);
 }
 
 .detalles .recientes table tr td {
@@ -426,7 +445,42 @@ body {
     text-align: center;
 }
 
-.editar, .eliminar {
+.detalles .recientes table tbody tr:hover,
+.detalles .existencias table tr:hover {
+    background-color: var(--azul);
+    color: white;
+}
+
+.existencias .producto-tarjeta {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.existencias .producto-tarjeta img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.existencias table tr td h4 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.2rem;
+}
+
+.existencias table tr td h4 span {
+    font-size: 14px;
+    color: var(--negro);
+}
+
+.existencias table tr:hover td h4 span {
+    color: var(--blanco);
+}
+
+.editar,
+.eliminar {
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
@@ -462,3 +516,95 @@ body {
 .agregar:hover {
     background-color: #0056b3;
 }
+
+@media (max-width: 1200px) {
+    .caja {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .con {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 991px) {
+    .navegar {
+      left: -300px;
+    }
+    .navegar.activo {
+      width: 300px;
+      left: 0;
+    }
+    .principal {
+      width: 100%;
+      left: 0;
+    }
+    .principal.activo {
+      left: 300px;
+    }
+    .caja {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .detalles {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .detalles {
+      grid-template-columns: 1fr;
+    }
+    .recientes {
+      overflow-x: auto;
+    }
+    .buscar {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .barra {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px;
+    }
+    .usuario {
+      position: static;
+      margin-top: 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .caja {
+      grid-template-columns: 1fr;
+    }
+    .encabezado h2 {
+      font-size: 20px;
+    }
+    .usuario {
+      min-width: 40px;
+    }
+    .navegar {
+      width: 100%;
+      left: -100%;
+      z-index: 1000;
+    }
+    .navegar.activo {
+      width: 100%;
+      left: 0;
+    }
+    .alternar {
+      z-index: 10001;
+    }
+    .principal.activo .alternar {
+      color: #fff;
+      position: fixed;
+      right: 0;
+      left: initial;
+    }
+    .fechas {
+      flex-direction: column;
+    }
+    .fechas input {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }

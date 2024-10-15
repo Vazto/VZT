@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION["bloq"] = 1;
                     header("Location:index.php?causa=bloq"); //vuelve al index con con la variable de sesion bloq y con la variable causa que avisará que esta bloqueado
                 } else { //sino es menor o igual a 0
-                    $_SESSION["intentos"] = $_SESSION["intentos"] - 1; // restamos 1 y volvemos a index con la variabla causa seteada en err
+                    $_SESSION["intentos"] = $_SESSION["intentos"] - 1; // restamos 1 y volvemos a index con la variable causa seteada en err
                     header("Location:index.php?causa=err");
                 }
             } else {
@@ -60,12 +60,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="barra">
         <div class="alternar">
             <img src="Imágenes/Iconos/Alternar.svg">
-        </div>
-        <div class="buscar">
-            <label>
-            <input type="text" placeholder="Buscar aquí" id="buscar">
-            <img src="Imágenes/Iconos/Buscar.svg">
-            </label>
         </div>
     </div>
     <div class="usuario">

@@ -33,15 +33,6 @@ $totales_productos_json = json_encode($datos_productos['totales']);
         <div class="alternar">
             <img src="Imágenes/Iconos/Alternar.svg">
         </div>
-        <div class="fechas">
-            <input type="text" id="fechainicial" name="fechainicial" placeholder="Fecha inicial" 
-                   onfocus="(this.type='date')" 
-                   onblur="if(!this.value)this.type='text'">
-            <input type="text" id="fechafinal" name="fechafinal" placeholder="Fecha final" 
-                   onfocus="(this.type='date')" 
-                   onblur="if(!this.value)this.type='text'" 
-                   max="<?php echo date('Y-m-d'); ?>">
-        </div>
     </div>
 
     <div class="usuario">
@@ -58,7 +49,7 @@ $totales_productos_json = json_encode($datos_productos['totales']);
                 <img src="Imágenes/Iconos/Ventas.svg">
             </div>
         </div>
-        <!-- Puedes añadir más tarjetas aquí -->
+       
     </div>
 
     <div class="con">
@@ -67,23 +58,33 @@ $totales_productos_json = json_encode($datos_productos['totales']);
             <canvas id="PieChart"></canvas>
         </div>
         <div class="sub">
+            <h2></h2>
             <canvas id="LineChart"></canvas>
+            <div class="fechas">
+            <input type="text" id="fechainicial" name="fechainicial" placeholder="Fecha inicial" 
+                   onfocus="(this.type='date')" 
+                   onblur="if(!this.value)this.type='text'">
+            <input type="text" id="fechafinal" name="fechafinal" placeholder="Fecha final" 
+                   onfocus="(this.type='date')" 
+                   onblur="if(!this.value)this.type='text'" 
+                   max="<?php echo date('Y-m-d'); ?>">
+        </div>
         </div>
     </div>
 
     <div class="detalles">
-        <div class="recientes">
-            <div class="encabezado">
-                <h2>Ventas recientes</h2>
-                <a href="" class="ver">Ver todo</a>
-            </div>
+    <div class="recientes">
+        <div class="encabezado">
+            <h2>Ventas recientes</h2>
+        </div>
+        <div class="tabla-contenedor">
             <table>
                 <thead>
                     <tr>
-                        <td>Producto(s)</td>
-                        <td>Precio</td>
-                        <td>Deuda</td>
-                        <td>Cliente</td>
+                        <th>Producto(s)</th>
+                        <th>Precio</th>
+                        <th>Deuda</th>
+                        <th>Cliente</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -98,11 +99,28 @@ $totales_productos_json = json_encode($datos_productos['totales']);
                 </tbody>
             </table>
         </div>
-        <div class="existencias">
-            <div class="encabezado">
-                <h2>Productos con pocas existencias</h2>
+    </div>
+    <div class="existencias">
+        <div class="encabezado">
+            <h2>Productos con pocas existencias</h2>
+        </div>
+        <div class="tabla-contenedor">
+            <table>
+                <tbody>
+                    <tr>
+                        <td width="60px">
+                            <div class="producto-tarjeta"><img src="assets/imgs/customer02.jpg" alt=""></div>
+                        </td>
+                        <td>
+                            <h4>David <br> <span>Italy</span></h4>
+                        </td>
+                    </tr>
+                    <!-- Más filas aquí -->
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 </div>
 
 <script>
@@ -206,6 +224,6 @@ $totales_productos_json = json_encode($datos_productos['totales']);
     }, 5000);
 });
 </script>
-<script src="/Ojevazt/Proyecto/script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

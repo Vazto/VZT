@@ -1,3 +1,10 @@
+<?php
+if (isset($_POST['agregar'])) {
+    header("Location: insertarproveedor.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -41,24 +48,21 @@
         </table>
         </div>
     </div>
-    <button class="agregar">+</button>
+    <form method="post" action="">
+        <button type="submit" name="agregar" class="agregar" aria-label="Agregar proveedor">+</button>
+    </form>
         
 
     <script src="Librerias/jQuery/jquery-3.7.1.min.js"></script>
     <script>
     function cargarProveedores(buscar = '') {
         $.ajax({
-            url: 'apiproveedores.php',
+            url: 'apis/apiproveedores.php',
             method: 'GET',
             data: { buscar: buscar },
             success: function(data) {
                 const tbody = $('#tabla-proveedores tbody');
                 tbody.empty();
-
-                if (data.length === 0) {
-                    window.location.href = 'insertarproveedor.php';
-                    return;
-                }
                 data.forEach(function(Proveedor) {
                     const fila = `<tr>
                         <td>${Proveedor.ID_PROVEEDOR}</td>

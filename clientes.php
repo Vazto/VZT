@@ -1,3 +1,10 @@
+<?php
+if (isset($_POST['agregar'])) {
+    header("Location: insertarclientes.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -43,23 +50,20 @@
             </tbody>
         </table>
     </div>
+    <form method="post" action="">
+        <button type="submit" name="agregar" class="agregar" aria-label="Agregar cliente">+</button>
+    </form>
 
     <script src="Librerias/jQuery/jquery-3.7.1.min.js"></script>
     <script>
     function cargarClientes(buscar = '') {
         $.ajax({
-            url: 'apiclientes.php',
+            url: 'apis/apiclientes.php',
             method: 'GET',
             data: { buscar: buscar },
             success: function(data) {
                 const tbody = $('#tabla-clientes tbody');
                 tbody.empty();
-
-                if (data.length === 0) {
-                    window.location.href = 'insertarclientes.php';
-                    return;
-                }
-
                 data.forEach(function(Cliente) {
                     const fila = `<tr>
                         <td>${Cliente.ID_CLIENTE}</td>

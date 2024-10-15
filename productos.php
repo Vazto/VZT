@@ -1,3 +1,10 @@
+<?php
+if (isset($_POST['agregar'])) {
+    header("Location: insertarproducto.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -43,23 +50,19 @@
             </tbody>
         </table>
     </div>
-
+    <form method="post" action="">
+        <button type="submit" name="agregar" class="agregar" aria-label="Agregar producto">+</button>
+    </form>
     <script src="Librerias/jQuery/jquery-3.7.1.min.js"></script>
     <script>
-
     function cargarProductos(buscar = '') {
         $.ajax({
-            url: 'apiproductos.php',
+            url: 'apis/apiproductos.php',
             method: 'GET',
             data: { buscar: buscar },
             success: function(data) {
                 const tbody = $('#tabla-productos tbody');
                 tbody.empty();
-
-                if (data.length === 0) {
-                    window.location.href = 'insertarproducto.php';
-                    return;
-                }
                 data.forEach(function(Producto) {
                     const fila = `<tr>
                         <td>${Producto.ID_PRODUCTO}</td>

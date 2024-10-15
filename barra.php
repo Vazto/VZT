@@ -61,16 +61,5 @@
             </ul>
         </div>
     </div>
-
-    <script>
-        let lista = document.querySelectorAll('.navegar li');
-    function enlaceActivo() {
-        lista.forEach((item) =>
-            item.classList.remove(''));
-        this.classList.add('hovered');
-    }
-    lista.forEach((item) =>
-        item.addEventListener('mouseover', enlaceActivo));
-    </script>
 </body>
 </html>
