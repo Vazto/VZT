@@ -63,7 +63,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
     <div class="usuario">
-        <img src="" alt="Usuario">
+       <a href="close.php">cerrar sesion</a>
+
     </div>
     <h1>Bienvenido <?php echo $_SESSION["nombre"]; ?></h1>
     <h2 id="titulo_con_fecha"></h2>

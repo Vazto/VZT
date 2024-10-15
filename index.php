@@ -59,7 +59,7 @@ if (isset($_SESSION["usuario"]) && isset($_SESSION["contraseña"])){//si ya est�
                     <a href="registro.php" class="linkk">registrar usuario</a>
             <h4>¿has olvidado tu contraseña?</h4>
                    
-  /form>
+  
     <?php include("footer.html") ?>
     </div>
 </div>
