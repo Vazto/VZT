@@ -10,7 +10,7 @@ if (isset($_SESSION["usuario"]) && isset($_SESSION["contraseña"])){//si ya est�
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Ojevazt/css/registro.css">
+    <link rel="stylesheet" href="/vzt/css/registro.css">
     <title>Inicio de Sesión</title>
 </head>
 <body>

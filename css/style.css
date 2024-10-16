@@ -26,7 +26,7 @@ body {
     width: 300px;
     height: 100%;
     background: var(--c1);
-    border-left: 10px solid var(--c1);
+    border-left: 10px solid var(--c2);
     transition: 0.5s;
     overflow: hidden;
 }
@@ -52,7 +52,7 @@ body {
 }
 
 .navegar ul li:hover {
-    background: var(--blanco);
+    background: var(--c3);
 }
 
 .navegar ul li a {
@@ -61,7 +61,7 @@ body {
     width: 100%;
     display: flex;
     text-decoration: none;
-    color: var(--blanco);
+    color: var(--c3);
 }
 
 .navegar ul li:hover a {
@@ -128,7 +128,7 @@ body {
     height: 50px;
     background: transparent;
     border-radius: 50%;
-    box-shadow: 35px 35px 0 10px var(--blanco);
+    box-shadow: 35px 35px 0 10px var(--c3);
     pointer-events: none;
 }
 
@@ -141,7 +141,7 @@ body {
     height: 50px;
     background: transparent;
     border-radius: 50%;
-    box-shadow: 35px -35px 0 10px var(--blanco);
+    box-shadow: 35px -35px 0 10px var(--c3);
     pointer-events: none;
 }
 
@@ -150,7 +150,7 @@ body {
     width: calc(100% - 300px);
     left: 300px;
     min-height: 100vh;
-    background: var(--blanco);
+    background: var(--c3);
     transition: 0.5s;
 }
 
@@ -271,7 +271,7 @@ body {
 .caja .tarjeta:hover .numeros,
 .caja .tarjeta:hover .nombres,
 .caja .tarjeta:hover .icono-tarjeta {
-    color: var(--blanco);
+    color: var(--c3);
 }
 
 .caja .tarjeta-1:hover .icono-tarjeta img {
@@ -385,7 +385,7 @@ body {
     padding: 30px;
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0.2);
     border: solid #dbdbdb 0.571429px;
-    background-color: var(--blanco);
+    background-color: var(--c3);
     color: var(--c1);
     align-items: center;
 
@@ -476,7 +476,7 @@ body {
 }
 
 .existencias table tr:hover td h4 span {
-    color: var(--blanco);
+    color: var(--c3);
 }
 
 .editar,
