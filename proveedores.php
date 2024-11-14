@@ -1,124 +1,70 @@
 <?php
+include_once 'chequeo.php';
+
 if (isset($_POST['agregar'])) {
-    header("Location: insertarproveedor.php");
+    header("Location: gestionar_proveedores/agregar.php");
     exit();
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title></title>
+    <link rel="stylesheet" href="css/table-styles.css">
+    <script src="libs/jquery/jquery-3.7.1.min.js"></script>
+    <title>Proveedores</title>
 </head>
+
 <body>
-<?php include("barra.php"); ?>
-<div class="principal">
-    <div class="barra">
-        <div class="alternar">
-            <img src="Imágenes/Iconos/Alternar.svg">
+    <?php include_once 'barra.php'; ?>
+    <div class="principal">
+        <div class="barra">
+            <div class="alternar">
+                <img src="imgs/icons/alternar.svg">
+            </div>
+            <div class="buscar">
+                <label>
+                    <input type="text" placeholder="Buscar aquí" id="buscar">
+                    <img src="imgs/icons/buscar.svg">
+                </label>
+            </div>
+            <?php include_once 'menu.php'; ?>
         </div>
-        <div class="buscar">
-            <label>
-            <input type="text" placeholder="Buscar aquí" id="buscar">
-            <img src="Imágenes/Iconos/Buscar.svg">
-            </label>
+
+        <div class="tabla-encabezado">
+            <h2>Proveedores</h2>
+            <form method="POST">
+                <button type="submit" name="agregar" class="agregar">Agregar</button>
+            </form>
         </div>
-    </div>
-    <div class="usuario">
-        <img src="" alt="Usuario">
-    </div>
+        <div class="recipiente">
+            <table class="contenido" id="tabla-proveedores">
+                <thead>
+                    <tr>
+                        <th>Contacto</th>
+                        <th>Razón Social</th>
+                        <th>RUT</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-    <div class="detalles">
-        <div class="recientes">
-        <table id="tabla-proveedores">
-            <thead>
-                <tr>
-                    <td>ID</td>
-                    <td>Contacto</td>
-                    <td>Razón Social</td>
-                    <td>RUT</td>
-                    <td>Acción</td>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+            <div class="paginacion-contenedor">
+            <button>Anterior</button>
+            <div class="paginacion"></div>
+            <button>Siguiente</button>
         </div>
+        </div>
+       
     </div>
-    <form method="post" action="">
-        <button type="submit" name="agregar" class="agregar" aria-label="Agregar proveedor">+</button>
-    </form>
-        
-
-    <script src="Librerias/jQuery/jquery-3.7.1.min.js"></script>
-    <script>
-    function cargarProveedores(buscar = '') {
-        $.ajax({
-            url: 'apis/apiproveedores.php',
-            method: 'GET',
-            data: { buscar: buscar },
-            success: function(data) {
-                const tbody = $('#tabla-proveedores tbody');
-                tbody.empty();
-                data.forEach(function(Proveedor) {
-                    const fila = `<tr>
-                        <td>${Proveedor.ID_PROVEEDOR}</td>
-                        <td>${Proveedor.Contacto}</td>
-                        <td>${Proveedor.Razón_Social}</td>
-                        <td>${Proveedor.RUT}</td>
-                        <td>
-                        <button class="editar" data-id="${Proveedor.ID_PROVEEDOR}">Editar</button>
-                        <button class="eliminar" data-id="${Proveedor.ID_PROVEEDOR}">Eliminar</button>
-                        </td>
-                    </tr>`;
-                    tbody.append(fila);
-                });
-            }
-        });
-    }
-
-    function eliminarProveedor(id) {
-        if (confirm("¿Seguro que deseas eliminar este proveedor?")) {
-            $.ajax({
-                url: 'eliminarproveedores.php',
-                method: 'POST',
-                data: { id: id },
-                success: function(response) {
-                    alert("Proveedor eliminado");
-                    cargarProveedores();
-                }
-            });
-        }
-    }
-
-    function editarProveedor(id) {
-        window.location.href = `editarproveedor.php?id=${id}`;
-    }
-
-    $(document).on('click', '.eliminar', function() {
-        const id = $(this).data('id');
-        eliminarProveedor(id);
-    });
-
-    $(document).on('click', '.editar', function() {
-        const id = $(this).data('id');
-        editarProveedor(id);
-    });
-
-    $(document).ready(function() {
-        cargarProveedores();
-
-        $('#buscar').on('input', function() {
-            const terminoBusqueda = $(this).val();
-            cargarProveedores(terminoBusqueda);
-        });
-    });
-    
-    </script>
+    <script src="js/proveedores.js"></script>
     <script src="js/script.js"></script>
-</div>
 </body>
+
 </html>

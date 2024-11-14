@@ -1,64 +1,61 @@
 <?php
-function getVentasRecientes($conexion) {
-    $consulta = "SELECT v.ID_VENTA, GROUP_CONCAT(p.Nombre SEPARATOR ', ') AS Productos, SUM(v.Precio_Final) AS Precio, SUM(c.Deuda) AS Deuda, c.Nombre AS Cliente FROM Venta v JOIN Productos_Vendidos pv ON v.ID_VENTA = pv.ID_VENTA JOIN Producto p ON pv.ID_PRODUCTO = p.ID_PRODUCTO JOIN Cliente c ON v.ID_CLIENTE = c.ID_CLIENTE GROUP BY v.ID_VENTA LIMIT 10";
-    return mysqli_query($conexion, $consulta);
+function getVentas($bd) {
+    $consulta = "SELECT COUNT(*) AS total FROM venta";
+    $resultado = mysqli_query($bd, $consulta);
+    $ventas = mysqli_fetch_assoc($resultado);
+    return $ventas['total'];
 }
 
-function getCantidadVentas($conexion) {
-    $consulta = "SELECT COUNT(*) AS Ventas FROM Venta";
-    $resultado = mysqli_query($conexion, $consulta);
-    $fila = mysqli_fetch_assoc($resultado);
-    return $fila['Ventas'];
+function getCobros($bd) {
+    $consulta = "SELECT COUNT(*) AS total FROM cobro";
+    $resultado = mysqli_query($bd, $consulta);
+    $cobros = mysqli_fetch_assoc($resultado);
+    return $cobros['total'];
 }
 
-function obtenerDatosVentas($conexion, $fecha_inicial, $fecha_final) {
-    $fecha_inicial = mysqli_real_escape_string($conexion, $fecha_inicial);
-    $fecha_final = mysqli_real_escape_string($conexion, $fecha_final);
-    
-    $consulta = "
-        SELECT DATE(Fecha_Venta) as Fecha, COUNT(*) as Total 
-        FROM Venta 
-        WHERE Fecha_Venta BETWEEN '$fecha_inicial' AND '$fecha_final'
-        GROUP BY DATE(Fecha_Venta)
-        ORDER BY Fecha_Venta
-    ";
-    $resultado = mysqli_query($conexion, $consulta);
+function getCompras($bd) {
+    $consulta = "SELECT COUNT(*) AS total FROM compra";
+    $resultado = mysqli_query($bd, $consulta);
+    $compras = mysqli_fetch_assoc($resultado);
+    return $compras['total'];
+}
 
-    $etiquetas = [];
-    $datos = [];
+function getPagos($bd) {
+    $consulta = "SELECT COUNT(*) AS total FROM pago";
+    $resultado = mysqli_query($bd, $consulta);
+    $pagos = mysqli_fetch_assoc($resultado);
+    return $pagos['total'];
+}
 
+function getClientesCumpleaños($bd) {
+    $fecha_actual = date('m-d');
+    $consulta = "SELECT nombre FROM cliente WHERE DATE_FORMAT(fecha_nacimiento, '%m-%d') = '$fecha_actual'";
+    $resultado = mysqli_query($bd, $consulta);
+    $clientes = [];
     while ($fila = mysqli_fetch_assoc($resultado)) {
-        $etiquetas[] = $fila['Fecha'];
-        $datos[] = $fila['Total'];
+        $clientes[] = $fila['nombre'];
     }
-
-    return ['etiquetas' => $etiquetas, 'datos' => $datos];
+    return $clientes;
 }
 
-function obtenerDatosProductosVendidos($conexion, $fecha_inicial, $fecha_final) {
-    $fecha_inicial = mysqli_real_escape_string($conexion, $fecha_inicial);
-    $fecha_final = mysqli_real_escape_string($conexion, $fecha_final);
-
-    $consulta = "
-        SELECT p.Nombre as Nombre, SUM(pv.Cantidad_de_Venta) as Total 
-        FROM Productos_Vendidos pv
-        JOIN Producto p ON pv.ID_PRODUCTO = p.ID_PRODUCTO
-        JOIN Venta v ON pv.ID_VENTA = v.ID_VENTA
-        WHERE v.Fecha_Venta BETWEEN '$fecha_inicial' AND '$fecha_final'
-        GROUP BY p.ID_PRODUCTO
-        ORDER BY Total DESC 
-        LIMIT 5
-    ";
-    $resultado = mysqli_query($conexion, $consulta);
-
-    $nombres = [];
-    $totales = [];
-
+function getFacturasPorVencer($bd) {
+    $fecha_actual = date('Y-m-d');
+    $consulta = "SELECT id_compra, precio, vencimiento FROM compra WHERE vencimiento > '$fecha_actual' ORDER BY vencimiento ASC";
+    $resultado = mysqli_query($bd, $consulta);
+    $facturas = [];
     while ($fila = mysqli_fetch_assoc($resultado)) {
-        $nombres[] = $fila['Nombre'];
-        $totales[] = $fila['Total'];
+        $facturas[] = $fila;
     }
+    return $facturas;
+}
 
-    return ['nombres' => $nombres, 'totales' => $totales];
+function getProductosExistencias($bd) {
+    $consulta = "SELECT nombre, cantidad, existencias_alerta FROM producto WHERE cantidad <= existencias_alerta ORDER BY cantidad ASC LIMIT 5";
+    $resultado = mysqli_query($bd, $consulta);
+    $productos = [];
+    while ($fila = mysqli_fetch_assoc($resultado)) {
+        $productos[] = $fila;
+    }
+    return $productos;
 }
 ?>

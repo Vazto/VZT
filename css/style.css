@@ -1,19 +1,177 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Regular.ttf');
+}
+
+:root {
+    --primario:#ec6931;
+    --primario-oscuro: #af522a;
+    --blanco: #f5f5f5;
+    --blanco2: #f0f2f5;
+    --gris: #b1bfcd;
+    --negro: #1c1c1c;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
-}
-
-:root {
-    --c1: #ffa703;
-    --c2:#0000;
-    --c3:#001F47;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
+    position: relative;
     min-height: 100vh;
     overflow-x: hidden;
+}
+
+.form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--blanco2);
+}
+
+.envoltorio {
+    position: relative;
+    width: 320px;
+    margin: 50px auto;
+    padding: 32px 16px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: var(--blanco);
+    box-shadow: 0 20px 34px rgba(0, 0, 0, 0.1);
+}
+
+.pauta {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.envoltorio h2 {
+    margin-bottom: 20px;
+    font-size: 32px;
+    color: var(--negro);
+}
+
+.entrada input {
+    position: relative;
+    width: 92%;
+    margin-bottom: 10px;
+    padding: 12px 20px;
+    border: 1px solid var(--blanco);
+    border-radius: 20px;
+    outline: none;
+    background: var(--blanco2);
+    transition: border-color 0.3s ease;
+}
+
+.entrada input:focus {
+    border-color: var(--gris);
+}
+
+.entrada select {
+    position: relative;
+    width: 92%;
+    margin-bottom: 10px;
+    padding: 12px 20px;
+    border: 1px solid var(--blanco);
+    border-radius: 20px;
+    outline: none;
+    background: var(--blanco2);
+    transition: border-color 0.3s ease;
+}
+
+.entrada select:focus {
+    border-color: var(--gris);
+}
+
+.boton {
+    position: relative;
+    width: 90%;
+    margin-top: 10px;
+    padding: 10px 0;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    font-size: 16px;
+    color: var(--blanco);
+    background: var(--primario);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.boton:hover {
+    background: var(--primario-oscuro);
+}
+
+.recordar {
+    position: relative;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+
+.recordar label {
+    display: flex;
+    align-items: center;
+}
+
+.recordar label input {
+    margin-right: 6px;
+}
+
+.recordar a {
+    color: var(--negro);
+    text-decoration: none;
+    transition: text-decoration 0.3s ease;
+}
+
+.recordar a:hover {
+    text-decoration: underline;
+}
+
+.enlace {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.enlace p a {
+    color: var(--primario);
+    text-decoration: none;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.enlace p a:hover {
+    color: var(--primario-oscuro);
+    text-decoration: underline;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto;
+    padding: 10px 0;
+    font-size: 12px;
+    color: var(--negro);
+    text-align: center;
+}
+
+footer a {
+    color: var(--primario);
+    text-decoration: none;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+footer a:hover {
+    color: var(--primario-oscuro);
+    text-decoration: underline;
 }
 
 .contenedor {
@@ -23,12 +181,14 @@ body {
 
 .navegar {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 300px;
     height: 100%;
-    background: var(--c1);
-    border-left: 10px solid var(--c2);
-    transition: 0.5s;
+    border-left: 10px solid var(--primario);
     overflow: hidden;
+    background: var(--primario);
+    transition: 0.5s;
 }
 
 .navegar.activo {
@@ -52,7 +212,7 @@ body {
 }
 
 .navegar ul li:hover {
-    background: var(--c3);
+    background: var(--blanco2);
 }
 
 .navegar ul li a {
@@ -60,12 +220,12 @@ body {
     display: block;
     width: 100%;
     display: flex;
+    color: var(--blanco2);
     text-decoration: none;
-    color: var(--c3);
 }
 
 .navegar ul li:hover a {
-    color: var(--c1);
+    color: var(--primario);
 }
 
 .navegar ul li a .icono {
@@ -87,62 +247,156 @@ body {
     white-space: nowrap;
 }
 
-.navegar ul li:nth-child(1):hover .icono img {
-    content: url('../Imágenes/Iconos/Menu hover.svg');
-}
-
-.navegar ul li:nth-child(2):hover .icono img {
-    content: url('../Imágenes/Iconos/Cobros hover.svg');
-}
-
-.navegar ul li:nth-child(3):hover .icono img {
-    content: url('../Imágenes/Iconos/Pagos hover.svg');
-}
-
-.navegar ul li:nth-child(4):hover .icono img {
-    content: url('../Imágenes/Iconos/Proveedores hover.svg');
-}
-
-.navegar ul li:nth-child(5):hover .icono img {
-    content: url('../Imágenes/Iconos/Productos hover.svg');
-}
-
-.navegar ul li:nth-child(6):hover .icono img {
-    content: url('../Imágenes/Iconos/Clientes hover.svg');
-}
-
-.navegar ul li:nth-child(7):hover .icono img {
-    content: url('../Imágenes/Iconos/Resumen hover.svg');
-}
-
-.navegar ul li:nth-child(8):hover .icono img {
-    content: url('../Imágenes/Iconos/Sorteos hover.svg');
+.navegar ul li:hover a::before,
+.navegar ul li:hover a::after {
+    position: absolute;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: transparent;
+    content: '';
 }
 
 .navegar ul li:hover a::before {
-    content: '';
-    position: absolute;
-    right: 0;
     top: -50px;
-    width: 50px;
-    height: 50px;
-    background: transparent;
-    border-radius: 50%;
-    box-shadow: 35px 35px 0 10px var(--c3);
-    pointer-events: none;
+    box-shadow: 35px 35px 0 10px var(--blanco2);
 }
 
 .navegar ul li:hover a::after {
+    bottom: -50px;
+    box-shadow: 35px -35px 0 10px var(--blanco2);
+}
+
+.navegar ul li:nth-child(1):hover .icono img {
+    content: url('../imgs/icons/principal hover.svg');
+}
+
+.navegar ul li:nth-child(2):hover .icono img {
+    content: url('../imgs/icons/cobros hover.svg');
+}
+
+.navegar ul li:nth-child(3):hover .icono img {
+    content: url('../imgs/icons/pagos hover.svg');
+}
+
+.navegar ul li:nth-child(4):hover .icono img {
+    content: url('../imgs/icons/proveedores hover.svg');
+}
+
+.navegar ul li:nth-child(5):hover .icono img {
+    content: url('../imgs/icons/productos hover.svg');
+}
+
+.navegar ul li:nth-child(6):hover .icono img {
+    content: url('../imgs/icons/clientes hover.svg');
+}
+
+.navegar ul li:nth-child(7):hover .icono img {
+    content: url('../imgs/icons/resumen hover.svg');
+}
+
+.navegar ul li:nth-child(8):hover .icono img {
+    content: url('../imgs/icons/sorteos hover.svg');
+}
+
+.accion {
+    position: fixed;
+    top: 5px;
+    right: 30px;
+    z-index: 1;
+}
+
+.accion .perfil {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.accion .perfil img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.accion .desplegar {
+    position: absolute;
+    top: 70px;
+    right: -10px;
+    padding: 10px 20px;
+    background: var(--blanco);
+    width: 200px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    transition: 0.5s;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.accion:hover .desplegar {
+    visibility: visible;
+    opacity: 1;
+}
+
+.accion .desplegar::before {
     content: '';
     position: absolute;
-    right: 0;
-    bottom: -50px;
-    width: 50px;
-    height: 50px;
-    background: transparent;
-    border-radius: 50%;
-    box-shadow: 35px -35px 0 10px var(--c3);
-    pointer-events: none;
+    top: -5px;
+    right: 28px;
+    width: 20px;
+    height: 20px;
+    background: var(--blanco);
+    transform: rotate(45deg);
+}
+
+.accion .desplegar h3 {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    padding: 20px 0;
+    font-weight: 500;
+    color: var(--negro);
+    line-height: 1.2em;
+}
+
+.accion .desplegar ul li {
+    list-style: none;
+    padding: 10px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.accion .desplegar ul li img {
+    max-width: 20px;
+    margin-right: 10px;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.accion .desplegar ul li:hover img {
+    opacity: 0.5;
+}
+
+.accion .desplegar ul li a {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--negro);
+    font-weight: 500;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.accion .desplegar ul li:hover a {
+    opacity: 0.5;
 }
 
 .principal {
@@ -150,7 +404,7 @@ body {
     width: calc(100% - 300px);
     left: 300px;
     min-height: 100vh;
-    background: var(--c3);
+    background: var(--blanco2);
     transition: 0.5s;
 }
 
@@ -162,10 +416,10 @@ body {
 .barra {
     width: 100%;
     height: 60px;
+    padding: 0 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10px;
 }
 
 .alternar {
@@ -192,11 +446,10 @@ body {
 .buscar label input {
     width: 100%;
     height: 40px;
+    padding: 5px 20px 5px 45px;
+    border: 1px solid var(--negro);
     border-radius: 40px;
-    padding: 5px 20px;
-    padding-left: 45px;
     outline: none;
-    border: 1px solid var(--c3);
 }
 
 .buscar label img {
@@ -204,26 +457,6 @@ body {
     top: 50%;
     left: 15px;
     transform: translateY(-50%);
-}
-
-.usuario {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.usuario img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 .caja {
@@ -237,374 +470,119 @@ body {
 
 .caja .tarjeta {
     position: relative;
-    background: white;
     padding: 30px;
-    border-radius: 5px;
     display: flex;
     justify-content: space-between;
-    cursor: pointer;
+    border-radius: 5px;
+    background: var(--blanco);
+    cursor: default;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
 }
-
 
 .caja .tarjeta .numeros {
     position: relative;
     font-weight: 500;
-    font-size: 2.5em;
-    color: var(--c1);
+    font-size: 1.2em;
+    color: var(--primario);
 }
 
 .caja .tarjeta .nombres {
-    color: var(--c3);
-    font-size: 1.1em;
     margin-top: 5px;
+    font-size: 1.1em;
+    color: var(--negro);
 }
 
 .caja .tarjeta .icono-tarjeta {
-    color: var(--c3);
+    color: var(--negro);
 }
 
 .caja .tarjeta:hover {
-    background: var(--c1);
+    background: var(--primario);
 }
 
 .caja .tarjeta:hover .numeros,
 .caja .tarjeta:hover .nombres,
 .caja .tarjeta:hover .icono-tarjeta {
-    color: var(--c3);
+    color: var(--blanco2);
 }
 
 .caja .tarjeta-1:hover .icono-tarjeta img {
-    content: url('../Imágenes/Iconos/Ventas hover.svg');
+    content: url('../imgs/icons/ventas hover.svg');
 }
 
 .caja .tarjeta-2:hover .icono-tarjeta img {
-    content: url('../Imágenes/Iconos/ProductoA hover.svg');
+    content: url('../imgs/icons/cobros resumen hover.svg');
 }
 
 .caja .tarjeta-3:hover .icono-tarjeta img {
-    content: url('../Imágenes/Iconos/ProductoB hover.svg');
+    content: url('../imgs/icons/compras hover.svg');
 }
 
 .caja .tarjeta-4:hover .icono-tarjeta img {
-    content: url('../Imágenes/Iconos/ProductoC hover.svg');
+    content: url('../imgs/icons/pagos resumen hover.svg');
 }
 
 .con {
     position: relative;
     width: 100%;
-    padding: 20px;
+    padding: 15px;
     display: grid;
     grid-template-columns: 1fr 2fr;
-    grid-gap: 30px;
+    grid-gap: 20px;
     box-sizing: border-box;
-    min-height: 200px;
+    min-height: 150px;
+}
+
+.con {
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 15px;
+    box-sizing: border-box;
+    min-height: auto;
+    max-height: calc(100vh - 200px);
+    overflow: hidden;
 }
 
 .con .sub {
     position: relative;
-    background-color: white;
-    padding: 20px;
-    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-    border-radius: 20px;
-    box-sizing: border-box;
-}
-
-.sub h2 {
-    font-weight: 600;
-    color: var(--c1);
-    margin-bottom: 20px;
-}
-
-.fechas {
-    position: relative;
-    width: 100%;
-    max-width: 600px;
-    margin: 20px auto 0;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.fechas input {
-    width: calc(50% - 10px);
-    height: 40px;
-    border-radius: 40px;
-    padding: 5px 20px;
-    outline: none;
-    border: 1px solid var(--c3);
-    box-sizing: border-box;
-    font-size: 14px;
-    transition: all 0.3s ease;
-}
-
-.detalles {
-    position: relative;
-    width: 100%;
-    padding: 20px;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-gap: 30px;
-}
-
-.detalles .recientes,
-.detalles .existencias {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    background: white;
-    padding: 20px;
-    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-    border-radius: 20px;
-    height: 500px;
-}
-
-.encabezado {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 20px;
-}
-
-.encabezado h2 {
-    font-weight: 600;
-    color: var(--c1);
-    margin: 0;
-    padding-bottom: 10px;
-}
-
-
-
-
-
-.login{
-
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 5px 5px 0 rgba(0, 0, 0.2);
-    border: solid #dbdbdb 0.571429px;
-    background-color: var(--c3);
-    color: var(--c1);
-    align-items: center;
-
-
-}
-
-
-
-
-
-
-
-.tabla-contenedor {
-    flex-grow: 1;
-    overflow-y: auto;
-    margin-top: 10px;
-}
-
-.detalles table {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0 10px;
-}
-
-.detalles table thead td {
-    font-weight: 600;
-    padding-bottom: 10px;
-}
-
-.detalles .recientes table tr {
-    color: var(--black1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.detalles .recientes table tr:last-child {
-    border-bottom: none;
-}
-
-.detalles .recientes table tbody tr:hover {
-    background: var(--blue);
-    color: var(--white);
-}
-
-.detalles .recientes table tr td {
+    background-color: var(--blanco);
     padding: 10px;
-}
-
-.detalles .recientes table tr td:last-child {
-    text-align: end;
-}
-
-.detalles .recientes table tr td:nth-child(2) {
-    text-align: end;
-}
-
-.detalles .recientes table tr td:nth-child(3) {
-    text-align: center;
-}
-
-.detalles .recientes table tbody tr:hover,
-.detalles .existencias table tr:hover {
-    background-color: var(--c1);
-    color: white;
-}
-
-.existencias .producto-tarjeta {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    box-sizing: border-box;
     overflow: hidden;
 }
 
-.existencias .producto-tarjeta img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.existencias table tr td h4 {
-    font-size: 16px;
+.sub h2 {
+    text-align: center;
     font-weight: 600;
-    line-height: 1.2rem;
+    color: var(--primario);
+    margin-bottom: 10px;
+    font-size: 1em;
 }
 
-.existencias table tr td h4 span {
-    font-size: 14px;
-    color: var(--c3);
+.sub canvas {
+    max-width: 100%;
+    height: auto !important;
 }
 
-.existencias table tr:hover td h4 span {
-    color: var(--c3);
-}
-
-.editar,
-.eliminar {
-    padding: 5px 10px;
+.volver {
+    background-color:#ec6931;
+    color: white;
     border: none;
+    padding: 8px 16px;
     border-radius: 5px;
     cursor: pointer;
-    margin: 0 5px;
-}
-
-.editar {
-    background-color: var(--c1);
-    color: white;
-}
-
-.eliminar {
-    background-color: #ff4d4d;
-    color: white;
-}
-
-.agregar {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    border: none;
-    border-radius: 50%;
-    background-color: #007BFF;
-    color: white;
-    font-size: 24px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s;
+    margin: 0 10px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
 }
 
-.agregar:hover {
-    background-color: #0056b3;
+.volver:hover {
+    background-color:#d86330;
 }
-
-@media (max-width: 1200px) {
-    .caja {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .con {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  @media (max-width: 991px) {
-    .navegar {
-      left: -300px;
-    }
-    .navegar.activo {
-      width: 300px;
-      left: 0;
-    }
-    .principal {
-      width: 100%;
-      left: 0;
-    }
-    .principal.activo {
-      left: 300px;
-    }
-    .caja {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .detalles {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .detalles {
-      grid-template-columns: 1fr;
-    }
-    .recientes {
-      overflow-x: auto;
-    }
-    .buscar {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    .barra {
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 10px;
-    }
-    .usuario {
-      position: static;
-      margin-top: 10px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .caja {
-      grid-template-columns: 1fr;
-    }
-    .encabezado h2 {
-      font-size: 20px;
-    }
-    .usuario {
-      min-width: 40px;
-    }
-    .navegar {
-      width: 100%;
-      left: -100%;
-      z-index: 1000;
-    }
-    .navegar.activo {
-      width: 100%;
-      left: 0;
-    }
-    .alternar {
-      z-index: 10001;
-    }
-    .principal.activo .alternar {
-      color: #fff;
-      position: fixed;
-      right: 0;
-      left: initial;
-    }
-    .fechas {
-      flex-direction: column;
-    }
-    .fechas input {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-  }

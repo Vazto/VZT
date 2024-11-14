@@ -1,50 +1,55 @@
 <?php
-include("bd.php");
-if (!file_exists("fotoperfil")) {
-    mkdir("fotoperfil");
-}
+include_once 'bd.php';
+session_start();
 
-$clavemaestra = "ojevazt2024"; // Clave maestra del software
+$nombre = $correo = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST["nombre"]) && isset($_POST["usuario"]) && isset($_POST["pass"]) && isset($_POST["pass2"]) && isset($_POST["correo"]) && isset($_POST["fecha"]) && isset($_FILES["fotoperfil"]) && isset($_POST["clavamaestra"])) {
-        if ($_POST["nombre"] != "" && $_POST["usuario"] != "" && $_POST["pass"] != "" && $_POST["pass2"] != "" && $_POST["correo"] != "" && $_POST["fecha"] != "" && $_FILES["fotoperfil"]["tmp_name"] != "" && $_POST["clavamaestra"] != "") {
-            if ($_POST["pass"] == $_POST["pass2"]) { // Chequea que las contraseñas sean iguales
-                if (strlen($_POST["pass"]) >= 6) { // Longitud mínima de la contraseña
-                    if ($_POST["fecha"] < "2020-01-01") {
-                        if ($_POST["clavamaestra"] == $clavemaestra) { // Verifica la clave maestra
-                            $chek = mysqli_query($bd, 'SELECT * FROM usuario WHERE usuario="' . $_POST["usuario"] . '"');
-
-                            if (mysqli_num_rows($chek) == 0) { // Verifica que el usuario no exista
-                                $fileName = $_FILES['fotoperfil']['name'];
-                                $targetFilePath = 'fotoperfil/' . $fileName;
-
-                                if (!file_exists($targetFilePath)) {
-                                    move_uploaded_file($_FILES['fotoperfil']['tmp_name'], $targetFilePath);
-                                } else {
-                                    $fileName = $_POST["usuario"] . '_' . $fileName; // Renombrar si el archivo ya existe
-                                    move_uploaded_file($_FILES['fotoperfil']['tmp_name'], 'fotoperfil/' . $fileName);
-                                }
-
-                                mysqli_query($bd, 'INSERT INTO Usuario (Usuario, Contraseña, Nombre, Correo, Foto_Perfil, Fecha_Nacimiento) VALUES ("' . $_POST["usuario"] . '","' . $_POST["pass"] . '","' . $_POST["nombre"] . '","' . $_POST["correo"]  . '","' . $fileName . '","' . $_POST["fecha"] . '");');
-                                header("Location:index.php?causa=reg");
-                            } else {
-                                header('Location:registro.php?causa=yaregistrado&nombre=' . $_POST["nombre"] . '&correo=' . $_POST["correo"] . '&fecha=' . $_POST["fecha"]);
-                            }
-                        } else {
-                            header('Location:registro.php?causa=clavemaestram&nombre=' . $_POST["nombre"] . '&usuario=' . $_POST["usuario"] . '&correo=' . $_POST["correo"] . '&fecha=' . $_POST["fecha"]);
-                        }
-                    } else {
-                        header('Location:registro.php?causa=menor&nombre=' . $_POST["nombre"] . '&usuario=' . $_POST["usuario"] . '&correo=' . $_POST["correo"]);
-                    }
-                } else {
-                    header('Location:registro.php?causa=contraseñacorta&nombre=' . $_POST["nombre"] . '&usuario=' . $_POST["usuario"] . '&correo=' . $_POST["correo"] . '&fecha=' . $_POST["fecha"]);
-                }
+    $nombre = $_POST['nombre'];
+    $correo = $_POST['correo'];
+    $contraseña = $_POST['contraseña'];
+    $confirmar = $_POST['confirmar'];
+    $clave = $_POST['clave'];
+    
+        if (empty($nombre)) {
+            echo "<script>alert('El nombre es requerido');</script>";
+        } 
+        elseif (empty($correo)) {
+            echo "<script>alert('El correo electrónico es requerido');</script>";
+        }
+        elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+            echo "<script>alert('Formato de correo electrónico inválido');</script>";
+        }
+        elseif (empty($contraseña)) {
+            echo "<script>alert('La contraseña es requerida');</script>";
+        }
+        elseif (strlen($contraseña) < 6) {
+            echo "<script>alert('La contraseña debe tener al menos 6 caracteres');</script>";
+        }
+        elseif ($contraseña !== $confirmar) {
+            echo "<script>alert('Las contraseñas no coinciden');</script>";
+        }
+        else {
+            $consulta = mysqli_query($bd, "SELECT * FROM usuario WHERE correo = '$correo'");
+            if (mysqli_num_rows($consulta) > 0) {
+                echo "<script>alert('Este correo electrónico ya está registrado');</script>";
             } else {
-                header('Location:registro.php?causa=contraseñasdistintas&nombre=' . $_POST["nombre"] . '&usuario=' . $_POST["usuario"] . '&correo=' . $_POST["correo"] . '&fecha=' . $_POST["fecha"]);
-            }
-        } else {
-            header('Location:registro.php?causa=campovacio&nombre=' . $_POST["nombre"] . '&usuario=' . $_POST["usuario"] . '&correo=' . $_POST["correo"] . '&fecha=' . $_POST["fecha"]);
+                $consulta = mysqli_query($bd, "SELECT clave FROM configuracion");
+                $fila = mysqli_fetch_assoc($consulta);
+                $clave_maestra = $fila['clave'];
+                if ($clave !== $clave_maestra) {
+                    echo "<script>alert('La clave maestra es incorrecta');</script>";
+            } else {
+                $contraseña_hash = password_hash($contraseña, PASSWORD_DEFAULT);
+                
+                $consulta = mysqli_query($bd, "INSERT INTO usuario (nombre, correo, contraseña) VALUES ('$nombre', '$correo', '$contraseña_hash')");
+                if ($consulta) {
+                    echo "<script>alert('Registro exitoso. Ahora puedes iniciar sesión.');</script>";
+                    echo "<script>window.location.href = 'index.php';</script>";
+                } else {
+                    echo "<script>alert('Error al registrar el usuario. Por favor, inténtalo de nuevo.');</script>";
+                }
+            }            
         }
     }
 }
@@ -52,72 +57,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrarme</title>
-    <link rel="stylesheet" href="/Ojevazt/css/registro.css">
+    <title>Registro</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+
+<body class="form">
     <div class="envoltorio">
-        <form method="POST" enctype="multipart/form-data">
-            <h1>Registrar usuario</h1>
+        <form method="POST">
+            <h2>Registro</h2>
             <div class="entrada">
-                <input type="text" name="nombre" placeholder="Ingrese su nombre" <?php if (isset($_GET["nombre"])) { echo "value='" . $_GET["nombre"] . "'"; } ?>>
+                <input type="text" name="nombre" placeholder="Nombre" value="<?php echo $nombre; ?>" required>
             </div>
             <div class="entrada">
-                <input type="text" name="usuario" placeholder="Ingrese su usuario" <?php if (isset($_GET["usuario"])) { echo "value='" . $_GET["usuario"] . "'"; } ?>>
+                <input type="email" name="correo" placeholder="Correo electrónico" value="<?php echo $correo; ?>" required>
             </div>
             <div class="entrada">
-                <input type="password" name="pass" placeholder="Ingrese contraseña">
+                <input type="password" name="contraseña" placeholder="Contraseña" required>
             </div>
             <div class="entrada">
-                <input type="password" name="pass2" placeholder="Repita contraseña">
+                <input type="password" name="confirmar" placeholder="Confirmar contraseña" required>
             </div>
             <div class="entrada">
-                <input type="email" name="correo" placeholder="Ingrese su correo" <?php if (isset($_GET["correo"])) { echo "value='" . $_GET["correo"] . "'"; } ?>>
+                <input type="password" name="clave" placeholder="Clave maestra" required>
             </div>
-            <div class="entrada">
-                <input type="date" max="2019-12-31" name="fecha" <?php if (isset($_GET["fecha"])) { echo "value='" . $_GET["fecha"] . "'"; } ?>>
+            <button type="submit" class="boton" name="boton">Registrarse</button>
+            <div class="enlace">
+                <p>¿Ya tienes una cuenta? <a href="index.php">Acceder</a></p>
             </div>
-            <div class="entrada">
-                <input type="file" name="fotoperfil" accept="image/*">
-            </div>
-            <div class="entrada">
-                <input type="password" name="clavamaestra" placeholder="Clave maestra">
-            </div>
-            
-            <?php
-            if (isset($_GET["causa"])) {
-                switch ($_GET['causa']) {
-                    case "yaregistrado":
-                        echo "<p>Ese nombre de usuario ya está registrado</p>";
-                        break;
-                    case "contraseñasdistintas":
-                        echo '<p>Las contraseñas no coinciden</p>';
-                        break;
-                    case "campovacio":
-                        echo '<p>Debes rellenar todos los campos</p>';
-                        break;
-                    case "contraseñacorta":
-                        echo '<p>La contraseña debe tener al menos 6 caracteres</p>';
-                        break;
-                    case "clavemaestram":
-                        echo '<p>La clave maestra está mal</p>';
-                        break;
-                    case "menor":
-                        echo '<p>Debes haber nacido antes del 2020 para registrarte</p>';
-                        break;
-                }
-            }
-            ?>
-            <button type="submit" class="boton">Registrarme</button>
-            <hr id="linea">
-            <h4>¿Ya tienes cuenta?</h4>
-            <a href="index.php" class="linkk">Iniciar Sesión</a>
         </form>
     </div>
-    <?php include("footer.html"); ?>
+
+    <?php include_once 'footer.html'; ?>
 </body>
-<script src="/Ojevazt/Proyecto/js/script.js" type="module"></script>
+
 </html>
